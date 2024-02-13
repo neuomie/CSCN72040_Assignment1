@@ -1,11 +1,15 @@
 package assignment1;
 
-public class AnotherClassifier extends NNClassifier{
-	@Override
-	public void printNN()
+public class AnotherClassifier {
+	
+	public void determinePosition()
 	{
-		System.out.println("PrintNN function is called");
+		System.out.println("determinePosition() function is called");
 	}
 	
-
+	public void positionResult()
+	{
+		System.out.println("positionResult() function is called");
+	}
+	
 }
