@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class NNClassifier {
     @SuppressWarnings("unused")
-    public  void printNN() {
+    public  void printNN(String filename) {
         
         // Declaration and assignment
         float x;
@@ -24,9 +24,9 @@ public class NNClassifier {
 
 
         // opening the training file
-        String filePath = "D:\\downloads\\trainingData1.txt"; // this will have to vary person running the code
+       // String filePath = "D:\\downloads\\trainingData1.txt"; // this will have to vary person running the code
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
 
             // Loop until the end of the file
