@@ -11,6 +11,7 @@ public class Main {
     	System.out.println("Option 3: Another Classifier");
     	System.out.println("Which option would you like to choose?: ");
     	int userChoice = myObj.nextInt();
+    	myObj.nextLine();
     	
     	switch(userChoice) {
     		case 1: // NN Classifier
@@ -21,6 +22,7 @@ public class Main {
 	        	
 	            NNClassifier a = new NNClassifier();
 	            a.printNN(inputFilename);
+	            break;
             
     		case 2:
     			Scanner myObj2 = new Scanner(System.in);
@@ -35,11 +37,13 @@ public class Main {
 	        	
 	            KNNClassifier b = new KNNClassifier();
 	            b.printKNN(trainingFilename, testingFilename);
-    	
+	            break;
+	            
     		case 3:
     			AnotherClassifier AC = new AnotherClassifier();
     	    	AC.determinePosition();
     	    	AC.positionResult();
+    	    	break;
     	}
     }
 }
