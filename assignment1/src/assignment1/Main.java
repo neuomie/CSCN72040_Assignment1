@@ -1,4 +1,5 @@
 package assignment1;
+
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
@@ -16,30 +17,29 @@ public class Main {
     	switch(userChoice) {
     		case 1: // NN Classifier
 	    		Scanner myObj1 = new Scanner(System.in);
-	        	System.out.println("Please in the file name would like take data from: ");
-	        	
+	        	System.out.println("Please enter the file name you would like to take data from: ");
 	        	String inputFilename = myObj1.nextLine();
 	        	
 	            NNClassifier a = new NNClassifier();
 	            a.printNN(inputFilename);
 	            break;
             
-    		case 2:
+    		case 2: // KNN Classifier
     			Scanner myObj2 = new Scanner(System.in);
-	        	System.out.println("Please in the training file name would like to train: ");
-	        	
+	        	System.out.println("Please enter the training file name you would like to use (trainingData1.txt): ");
 	        	String trainingFilename = myObj2.nextLine();
 	        	
-	        	System.out.println("Please in the testing file name would like to train: ");
-	        	
+	        	System.out.println("Please enter the testing file name you would like to use (testingData1.txt): ");
 	        	String testingFilename = myObj2.nextLine();
 	        	
+	        	System.out.println("Please enter the output file name you would like to create (result.txt): ");
+	        	String outputFilename = myObj2.nextLine();
 	        	
 	            KNNClassifier b = new KNNClassifier();
-	            b.printKNN(trainingFilename, testingFilename);
+	            b.printKNN(trainingFilename, testingFilename, outputFilename);
 	            break;
 	            
-    		case 3:
+    		case 3: // Another Classifier
     			AnotherClassifier AC = new AnotherClassifier();
     	    	AC.determinePosition();
     	    	AC.positionResult();

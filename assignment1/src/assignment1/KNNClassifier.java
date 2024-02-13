@@ -1,10 +1,10 @@
-package assignment1; //package name
+package assignment1;//package name
 import java.io.*;
 import java.util.*;
 
-public class KNNClassifier //class KNNClassifier.
+public class KNNClassifier //class KNNClassifier
 {
-    // Datapoint class with features and label
+	// Datapoint class with features and label
     static class DataPoint //nested class.
     {
         double[] features;//array of double to store features
@@ -12,8 +12,8 @@ public class KNNClassifier //class KNNClassifier.
 
         DataPoint(double[] features, String label) //constructor for datapoint class.
         {
-            this.features = features;   //assigning features array passed as parameter
-            this.label = label;  //assigning label passed as parameter
+            this.features = features;//assigning features array passed as parameter
+            this.label = label;//assigning label passed as parameter
         }
     }
 
@@ -56,7 +56,7 @@ public class KNNClassifier //class KNNClassifier.
         return tokens[tokens.length - 1];//return last token as label.
     }
 
-    //calculate Euclidean distance between the two vectors
+  //calculate Euclidean distance between the two vectors
     private static double calculateDistance(double[] a, double[] b) 
     {
         double sum = 0;
@@ -68,7 +68,7 @@ public class KNNClassifier //class KNNClassifier.
         return Math.sqrt(sum);
     }
 
-    //classify unknown data points using KNN
+  //classify unknown data points using KNN
     public static String classify(List<DataPoint> trainingData, double[] unknownFeatures, int k) 
     {
     	 PriorityQueue<DataPoint> nearestNeighbors = new PriorityQueue<>(
@@ -90,20 +90,40 @@ public class KNNClassifier //class KNNClassifier.
 
          return Collections.max(labelCount.entrySet(), Map.Entry.comparingByValue()).getKey();
     }
-         
 
     //Main method to run the KNN classifier
-    public void printKNN(String trainingfilename, String testingFilename) throws FileNotFoundException 
+    public void printKNN(String trainingfilename, String testingFilename, String outputFilename) throws FileNotFoundException 
     {
         List<DataPoint> trainingData = readDataFromFile(trainingfilename);
         List<DataPoint> unknownData = readDataFromFile(testingFilename);
-        int k = 3;//Set the value of k for KNN algorithm
+        int k = 3;
 
-        for (DataPoint unknown : unknownData) // Iterate through the unknown data points
+        // Mapping of labels to orientation descriptions
+        Map<String, String> orientationMap = new HashMap<>();
+        orientationMap.put("1", "Face Up");
+        orientationMap.put("2", "Face Down");
+        orientationMap.put("3", "Portrait");
+        orientationMap.put("4", "Portrait Upside Down");
+        orientationMap.put("5", "Landscape Left");
+        orientationMap.put("6", "Landscape Right");
+
+        try (PrintWriter writer = new PrintWriter(outputFilename)) 
         {
-            String predictedLabel = classify(trainingData, unknown.features, k);// Classify the unknown data point
-            System.out.println("The unknown data point with features " + Arrays.toString(unknown.features) +
-                    " is classified as: " + predictedLabel);// Print the predicted label
-        }
+        	//iterate over each unknown data point using KNN
+            for (DataPoint unknown : unknownData) 
+            {
+            	//Get prediction description corresponding to predicted label
+                String predictedLabel = classify(trainingData, unknown.features, k);
+                String orientation = orientationMap.get(predictedLabel);
+                //if orientation description is found,
+                if (orientation != null) 
+                {
+                    writer.println(Arrays.toString(unknown.features) + ", " + predictedLabel + ", " + orientation);
+                } else 
+                {
+                    writer.println(Arrays.toString(unknown.features) + "," + predictedLabel);
+                }
+            }
         }
     }
+}
